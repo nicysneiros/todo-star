@@ -19,9 +19,14 @@ def create_todo_list(title=None):
 	return http.Response({}, status=201)
 
 
+def list_todo_lists():
+	return http.Response(todo_lists, status=200)
+
+
 routes = [
     Route('/', 'GET', welcome),
     Route('/create_todo_list', 'POST', create_todo_list),
+    Route('/list_todo_lists', 'GET', list_todo_lists),
     Include('/docs', docs_urls),
     Include('/static', static_urls)
 ]
