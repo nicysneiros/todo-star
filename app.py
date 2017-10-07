@@ -1,9 +1,16 @@
 import json
-from apistar import Include, Route, http
+from apistar import Include, Route, http, typesystem
 from apistar.frameworks.wsgi import WSGIApp as App
 from apistar.handlers import docs_urls, static_urls
 
+
 todo_lists = []
+
+class TodoList(typesystem.Object):
+	properties = {
+		'title': typesystem.string(max_length=100)
+	}
+
 
 def welcome(name=None):
     if name is None:
@@ -11,10 +18,7 @@ def welcome(name=None):
     return {'message': 'Welcome to API Star, %s!' % name}
 
 
-def create_todo_list(title=None):
-	todo_list = {
-		'title': title
-	}
+def create_todo_list(todo_list: TodoList):
 	todo_lists.append(todo_list)
 	return http.Response({}, status=201)
 
