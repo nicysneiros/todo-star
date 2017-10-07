@@ -8,7 +8,10 @@ todo_lists = []
 
 class TodoList(typesystem.Object):
 	properties = {
-		'title': typesystem.string(max_length=100)
+		'title': typesystem.string(
+			max_length=100,
+			description="A title for your TODO list"
+		)
 	}
 
 
