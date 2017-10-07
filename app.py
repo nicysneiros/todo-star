@@ -35,8 +35,12 @@ def create_todo_list(session: Session, todo_list: TodoListType):
 	return http.Response({'id': new_todo_list.id}, status=201)
 
 
-def list_todo_lists():
-	return http.Response(todo_lists, status=200)
+def list_todo_lists(session:Session):
+	queryset = session.query(TodoList).all()
+	return [
+		{'id': todo_list.id, 'title': todo_list.title}
+		for todo_list in queryset
+	]
 
 
 settings = {
