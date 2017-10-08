@@ -35,10 +35,14 @@ class TodoListType(typesystem.Object):
 		)
 	}
 
+
 class TodoItemType(typesystem.Object):
 	properties = {
 		'description': typesystem.string(description="Your TODO item description"),
-		'deadline': typesystem.string(description="A deadline for your item"),
+		'deadline': typesystem.string(
+			description="A deadline for your item",
+			pattern=r'^\d{2}/\d{2}/\d{4}$'
+		),
 		'todo_list_id': typesystem.Integer
 	}
 
@@ -74,6 +78,7 @@ def list_todo_lists(session:Session):
 		for todo_list in queryset
 	]
 
+
 def add_todo_item(session: Session, todo_item: TodoItemType):
 	todo_list = session.query(TodoList).get(todo_item.get('todo_list_id'))
 	if todo_list:
@@ -107,6 +112,7 @@ routes = [
     Include('/docs', docs_urls),
     Include('/static', static_urls)
 ]
+
 
 app = App(
 	routes=routes, 
