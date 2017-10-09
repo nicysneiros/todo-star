@@ -15,6 +15,7 @@ def welcome(name=None):
         return {'message': 'Welcome to API Star!'}
     return {'message': 'Welcome to API Star, %s!' % name}
 
+
 @annotate(authentication=[BasicAuthentication()])
 def create_todo_list(session: Session, todo_list: TodoListType, auth:Auth):
 	user = session.query(User).filter_by(username=auth.get_user_id()).first()
@@ -32,25 +33,28 @@ def create_todo_list(session: Session, todo_list: TodoListType, auth:Auth):
 	return http.Response({"message": "User not found"}, status=400)
 
 
-def list_todo_lists(session:Session):
-	queryset = session.query(TodoList).all()
-	return [
-		{
-			'id': todo_list.id, 
-			'title': todo_list.title,
-			'user_id' : todo_list.user_id,
-			'itens': [
-				{
-					'description': item.description,
-					'deadline': item.deadline.strftime('%d/%m/%Y'),
-					'is_done': item.is_done
-				}
-				for item in todo_list.itens
-			]
-		}
-		for todo_list in queryset
-	]
-
+@annotate(authentication=[BasicAuthentication()])
+def list_todo_lists(session:Session, auth:Auth):
+	user = session.query(User).filter_by(username=auth.get_user_id()).first()
+	if user:
+		queryset = session.query(TodoList).filter_by(user_id=user.id)
+		return [
+			{
+				'id': todo_list.id, 
+				'title': todo_list.title,
+				'user_id' : todo_list.user_id,
+				'itens': [
+					{
+						'description': item.description,
+						'deadline': item.deadline.strftime('%d/%m/%Y'),
+						'is_done': item.is_done
+					}
+					for item in todo_list.itens
+				]
+			}
+			for todo_list in queryset
+		]
+	return http.Response({"id": "User not found"}, status=400)
 
 def add_todo_item(session: Session, todo_item: TodoItemType):
 	todo_list = session.query(TodoList).get(todo_item.get('todo_list_id'))
