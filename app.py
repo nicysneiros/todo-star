@@ -3,12 +3,14 @@ from apistar.backends.sqlalchemy_backend import commands, components
 
 from routes import routes
 from models import Base
+from authentication import BasicAuthentication
 
 settings = {
     "DATABASE": {
         "URL": "sqlite:///todo_list.db",
         "METADATA": Base.metadata
-    }
+    },
+    "AUTHENTICATION": [BasicAuthentication()]
 }
 
 

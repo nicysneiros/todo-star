@@ -19,3 +19,10 @@ class TodoItemType(typesystem.Object):
 		),
 		'todo_list_id': typesystem.Integer
 	}
+
+
+class UserType(typesystem.Object):
+	properties = {
+		'username': typesystem.string(description="Your username"),
+		'password': typesystem.string(description="Your password")
+	}
