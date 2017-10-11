@@ -9,7 +9,8 @@ from models import User
 class BasicAuthentication():
     def authenticate(self, authorization: http.Header, session: Session):
         """
-        Determine the user associated with a request, using HTTP Basic Authentication.
+        Determine the user associated with a request,
+        using HTTP Basic Authentication.
         """
         if authorization is None:
             return None

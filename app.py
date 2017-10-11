@@ -1,9 +1,12 @@
-from apistar.frameworks.wsgi import WSGIApp as App
 from apistar.backends.sqlalchemy_backend import commands, components
+from apistar.frameworks.wsgi import WSGIApp as App
+
+from authentication import BasicAuthentication
+
+from models import Base
 
 from routes import routes
-from models import Base
-from authentication import BasicAuthentication
+
 
 settings = {
     "DATABASE": {
@@ -15,10 +18,10 @@ settings = {
 
 
 app = App(
-	routes=routes, 
-	settings=settings,
-	commands=commands,
-	components=components
+    routes=routes,
+    settings=settings,
+    commands=commands,
+    components=components
 )
 
 

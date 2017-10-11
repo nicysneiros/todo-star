@@ -1,8 +1,9 @@
 from apistar import Include, Route
 from apistar.handlers import docs_urls, static_urls
+
 from views import (
-	welcome, create_todo_list, list_todo_lists, 
-	add_todo_item, create_user
+    add_todo_item, create_todo_list,
+    create_user, list_todo_lists, welcome
 )
 
 
