@@ -4,7 +4,7 @@ certifi==2017.7.27.1
 chardet==3.0.4
 coreapi==2.3.3
 coreschema==0.0.4
-Django==1.11.5
+Django==1.11.29
 greenlet==0.4.12
 gunicorn==19.7.1
 httptools==0.0.9
