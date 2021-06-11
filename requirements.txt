@@ -24,7 +24,7 @@ urllib3==1.22
 uvicorn==0.0.15
 uvitools==0.0.4
 uvloop==0.8.1
-websockets==3.4
+websockets==9.1
 Werkzeug==0.12.2
 wheel==0.24.0
 whitenoise==3.3.1
