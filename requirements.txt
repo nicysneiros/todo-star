@@ -26,5 +26,5 @@ uvitools==0.0.4
 uvloop==0.8.1
 websockets==3.4
 Werkzeug==0.12.2
-wheel==0.24.0
+wheel==0.38.1
 whitenoise==3.3.1
